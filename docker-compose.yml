@@ -1,0 +1,33 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: myapp
+    command: uvicorn backend.backend_api.api:app --host 0.0.0.0 --port 5000 --reload
+    volumes:
+      - .:/app
+    ports:
+      - 8000:5000
+    environment:
+      - SQLDB_USER=${SQLDB_TEST_USER}
+      - SQLDB_PASS=${SQLDB_TEST_PASS}
+      - SQLDB_HOST=${SQLDB_TEST_HOST}
+      - SQLDB_PORT=${SQLDB_TEST_PORT}
+      - SQLDB_NAME=${SQLDB_TEST_NAME}
+      - DATABASE_URL=postgresql://${SQLDB_TEST_USER}:${SQLDB_TEST_PASS}@${SQLDB_TEST_HOST}:${SQLDB_TEST_PORT}/${SQLDB_TEST_NAME}
+      - SECRET_KEY=${SECRET_KEY}
+
+  db:
+    image: postgres
+    volumes:
+      - to_do_list_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=db
+    ports:
+      - "5433:5432"
+
+volumes:
+  to_do_list_db:
