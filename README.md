@@ -63,11 +63,3 @@ Replace `your_token` with the token received from the authenticate API call.
 ## Development
 
 This project follows best practices for code organization, version control, error handling, and uses environment variables for sensitive information. It uses Alembic for database migrations and Docker for containerization.
-
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
